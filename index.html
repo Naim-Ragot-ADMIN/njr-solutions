@@ -1,0 +1,1265 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NJR Solutions - Nettoyage Textile Premium</title>
+    <link rel="icon" href="logo-njr.png" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap");
+      :root {
+        --ink: #e6ecf5;
+        --muted: #9aa4b2;
+        --brand: #0ea5a4;
+        --brand-2: #f59e0b;
+        --bg: #06070b;
+        --panel: #0f1218;
+        --panel-2: #141823;
+        --line: #232a38;
+        --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 70% 10%, rgba(14, 165, 164, 0.25), transparent 40%),
+          radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.18), transparent 35%),
+          var(--bg);
+        overflow-x: hidden;
+      }
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.18;
+        z-index: -1;
+        animation: float 18s ease-in-out infinite;
+      }
+      body::before {
+        left: -120px;
+        top: -140px;
+        background: radial-gradient(circle, rgba(14,165,164,0.75), transparent 60%);
+      }
+      body::after {
+        right: -140px;
+        bottom: -160px;
+        background: radial-gradient(circle, rgba(245,158,11,0.7), transparent 60%);
+        animation-delay: -6s;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(6, 7, 11, 0.75);
+        border-bottom: 1px solid var(--line);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+      }
+      header.scrolled {
+        background: rgba(6, 7, 11, 0.92);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      }
+      header::after {
+        content: "";
+        display: block;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(14,165,164,0.4), rgba(245,158,11,0.4), rgba(34,211,238,0.4));
+      }
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+      .logo-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #0b0f16;
+        border: 1px solid #2b3342;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      .logo-badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      nav a {
+        color: var(--ink);
+        text-decoration: none;
+        margin-left: 18px;
+        font-weight: 700;
+        font-size: 13px;
+        opacity: 0.85;
+        position: relative;
+      }
+      nav a:hover { opacity: 1; }
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--brand), #22d3ee);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+      nav a:hover::after { transform: scaleX(1); }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 64px 28px 32px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        position: relative;
+      }
+      .hero-glow {
+        position: absolute;
+        inset: -60px 0 auto 0;
+        height: 240px;
+        background:
+          radial-gradient(circle at 20% 40%, rgba(14,165,164,0.35), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(245,158,11,0.25), transparent 55%);
+        pointer-events: none;
+        filter: blur(10px);
+        opacity: 0.7;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 52px;
+        line-height: 1.05;
+        margin: 0 0 14px;
+      }
+      .hero h1 span {
+        background: linear-gradient(120deg, #f59e0b, #22d3ee);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero-brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 12px;
+      }
+      .hero-logo {
+        width: 88px;
+        height: 88px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #2b3342;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+        background: #0b0f16;
+      }
+      .hero-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .glow {
+        box-shadow:
+          0 0 18px rgba(245, 158, 11, 0.25),
+          0 0 40px rgba(14, 165, 164, 0.25);
+      }
+      .hero p { color: var(--muted); font-size: 18px; margin: 0 0 22px; }
+      .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn {
+        border: 1px solid var(--line);
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 800;
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      }
+      .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+      .btn-primary {
+        border: none;
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        color: #001419;
+        box-shadow: var(--shadow);
+      }
+      .btn-primary:hover { filter: saturate(1.1); }
+      .glass {
+        background: linear-gradient(180deg, rgba(20, 24, 35, 0.9), rgba(15, 18, 24, 0.9));
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+      .glass.accent {
+        background:
+          linear-gradient(180deg, rgba(20, 24, 35, 0.9), rgba(15, 18, 24, 0.9)),
+          radial-gradient(circle at top right, rgba(34, 211, 238, 0.22), transparent 45%);
+      }
+      .metric {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #0d1119;
+        border: 1px solid #1e2634;
+        font-weight: 700;
+      }
+
+      .section { max-width: 1200px; margin: 0 auto; padding: 32px 28px; }
+      .section { animation: fadeUp 0.8s ease both; }
+      .section + .section { border-top: 1px solid rgba(35,42,56,0.5); }
+      .section h2 {
+        font-size: 22px; margin: 0 0 16px; position: relative; display: inline-block;
+      }
+      .section h2::before {
+        content: "";
+        position: absolute;
+        left: -14px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        transform: translateY(-50%);
+      }
+      .section h2::after {
+        content: ""; position: absolute; left: 0; bottom: -6px; width: 52px; height: 3px;
+        border-radius: 999px; background: linear-gradient(90deg, var(--brand), #22d3ee);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--panel);
+        border-radius: 18px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: -80% 40% auto -40%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(14,165,164,0.14), transparent 60%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .card:hover::after { opacity: 1; }
+      .card h3 { margin: 0 0 6px; font-size: 16px; }
+      .card p { margin: 0; color: var(--muted); font-size: 14px; }
+      .icon-pill {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(14, 165, 164, 0.2), rgba(34, 211, 238, 0.15));
+        border: 1px solid rgba(34, 211, 238, 0.25);
+        color: #7dd3fc;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      .list { margin: 8px 0 0; padding-left: 0; list-style: none; color: var(--muted); font-size: 14px; }
+      .list li { margin: 4px 0; padding-left: 18px; position: relative; }
+      .list li::before {
+        content: ""; width: 8px; height: 8px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        position: absolute; left: 0; top: 7px;
+      }
+
+      .contact {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      }
+      .form-grid {
+        display: grid;
+        gap: 10px;
+      }
+      .input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #0d1119;
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 14px;
+      }
+      .input::placeholder { color: var(--muted); }
+      .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+      .notice {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #0d1119;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .notice a { color: var(--ink); text-decoration: none; font-weight: 700; }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #0d1119;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .ba {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .ba-box {
+        background: #0d1119;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        height: 180px;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .floating-cta {
+        display: none;
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        color: #001419;
+        font-weight: 800;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+        z-index: 20;
+      }
+      .footer {
+        text-align: center; padding: 28px; color: var(--muted); font-size: 12px;
+        border-top: 1px solid var(--line);
+      }
+      .preloader {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(14,165,164,0.18), transparent 40%), var(--bg);
+        display: grid;
+        place-items: center;
+        z-index: 9999;
+        animation: hideLoader 0.8s ease 1.6s forwards;
+      }
+      .preloader-inner {
+        display: grid;
+        place-items: center;
+        gap: 14px;
+      }
+      .preloader-logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #2b3342;
+        background: #0b0f16;
+        box-shadow:
+          0 0 18px rgba(245, 158, 11, 0.25),
+          0 0 40px rgba(14, 165, 164, 0.35);
+        animation: pulse 1.4s ease-in-out infinite;
+      }
+      .preloader-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .preloader-text { font-weight: 700; color: var(--muted); letter-spacing: 0.8px; font-size: 12px; }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      @keyframes hideLoader {
+        to { opacity: 0; visibility: hidden; }
+      }
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 36px 28px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .footer-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .footer-card h4 { margin: 0 0 8px; font-size: 14px; }
+      .footer-card p, .footer-card a { color: var(--muted); font-size: 13px; text-decoration: none; }
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 6px;
+      }
+      .calendar-title {
+        font-weight: 800;
+        font-size: 14px;
+      }
+      .cal-day {
+        padding: 8px 0;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 12px;
+        background: #0d1119;
+        border: 1px solid #1e2634;
+        color: var(--muted);
+      }
+      .cal-day.available {
+        color: #001419;
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        border: none;
+        font-weight: 800;
+      }
+      .cal-day.muted { opacity: 0.35; }
+      .cal-day.disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        background: #0b0f16;
+      }
+      .slot-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .week-row {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .week-pill {
+        padding: 8px 6px;
+        border-radius: 999px;
+        text-align: center;
+        font-size: 11px;
+        background: #0d1119;
+        border: 1px solid #1e2634;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .week-pill.active {
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        color: #001419;
+        border: none;
+        font-weight: 800;
+      }
+      .slot {
+        border: 1px solid var(--line);
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #0d1119;
+        color: var(--ink);
+        font-size: 12px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .slot.active {
+        background: linear-gradient(135deg, var(--brand), #22d3ee);
+        color: #001419;
+        border: none;
+      }
+      .map-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #0d1119;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .badge {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #0d1119;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+      }
+      .stat {
+        background: #0d1119;
+        border: 1px solid #1e2634;
+        border-radius: 14px;
+        padding: 14px 16px;
+        font-weight: 800;
+      }
+      .stat span { display: block; color: var(--muted); font-size: 12px; font-weight: 600; margin-top: 6px; }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50% { transform: translateY(20px) translateX(14px); }
+      }
+      .orbital {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .orbital span {
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        border: 1px solid rgba(34,211,238,0.12);
+        animation: spin 26s linear infinite;
+        opacity: 0.4;
+      }
+      .orbital span:nth-child(1) { top: -180px; right: -120px; }
+      .orbital span:nth-child(2) { bottom: -220px; left: -140px; animation-duration: 32s; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .ticker {
+        display: grid;
+        gap: 12px;
+        overflow: hidden;
+        position: relative;
+      }
+      .ticker-track {
+        display: grid;
+        gap: 12px;
+        animation: slide 12s linear infinite;
+      }
+      .ticker:hover .ticker-track { animation-play-state: paused; }
+      @keyframes slide {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+      }
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; }
+        nav { display: none; }
+        .contact { grid-template-columns: 1fr; }
+        .floating-cta { display: inline-flex; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader-inner">
+        <div class="preloader-logo"><img src="logo-njr.png" alt="NJR Solutions" /></div>
+        <div class="preloader-text">NJR SOLUTIONS</div>
+      </div>
+    </div>
+    <div class="orbital" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </div>
+    <header>
+      <div style="background: linear-gradient(90deg, rgba(245,158,11,0.25), rgba(14,165,164,0.25)); border-bottom:1px solid var(--line);">
+        <div style="max-width:1200px; margin:0 auto; padding:10px 28px; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:13px; color:var(--ink);">
+          <div><strong>Offre de lancement</strong> · -50% sur le 2e textile & -10% sur la 1re prestation.</div>
+          <a class="btn" style="padding:6px 12px; font-size:12px;" href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Offre%20de%20lancement%20NJR%20Solutions">Profiter</a>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="logo"><div class="logo-badge"><img src="logo-njr.png" alt="NJR Solutions" /></div> NJR Solutions</div>
+        <nav>
+          <a href="#services">Services</a>
+          <a href="#formules">Formules</a>
+          <a href="#deplacement">Déplacement</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div>
+        <div class="hero-brand">
+          <div class="hero-logo glow"><img src="logo-njr.png" alt="NJR Solutions" /></div>
+          <div>
+            <div style="font-weight:800; letter-spacing:0.6px;">NJR Solutions</div>
+            <div style="color:var(--muted); font-size:13px;">Nettoyage textile premium</div>
+          </div>
+        </div>
+        <h1>Nettoyage textile <span>premium</span> pour particuliers & professionnels.</h1>
+        <p>
+          Matelas, canapés, sièges auto : traitement profond antibactérien et anti‑acariens.
+          Intervention rapide à Villeneuve‑sur‑Lot et alentours.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="tel:0675835043">Appeler 06 75 83 50 43</a>
+          <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Devis%20NJR%20Solutions">Demander un devis</a>
+          <a class="btn" href="https://wa.me/33675835043">WhatsApp</a>
+        </div>
+      </div>
+      <div class="glass accent">
+        <div class="metric">Zone <span>Villeneuve‑sur‑Lot & alentours</span></div>
+        <div class="metric">Public <span>Professionnels & Particuliers</span></div>
+        <div class="metric">Traitement <span>Anti‑bactérien / Anti‑acariens</span></div>
+        <div class="metric">Déplacement <span>Sur site</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="entreprise">
+      <h2>Qui sommes‑nous ?</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>NJR Solutions</h3>
+          <p>Entreprise locale spécialisée dans le nettoyage textile et auto à domicile pour particuliers & professionnels.</p>
+        </div>
+        <div class="card">
+          <h3>Méthodes professionnelles</h3>
+          <p>Nous éliminons saletés, allergènes et mauvaises odeurs pour retrouver hygiène, fraîcheur et confort.</p>
+        </div>
+        <div class="card">
+          <h3>Accompagnement</h3>
+          <p>Conseils clairs, devis rapide et intervention soignée à Villeneuve‑sur‑Lot et alentours.</p>
+        </div>
+      </div>
+      <div class="stats" style="margin-top:14px;">
+        <div class="stat">Interventions locales<span>Villeneuve‑sur‑Lot & alentours</span></div>
+        <div class="stat">Clients variés<span>Particuliers & professionnels</span></div>
+        <div class="stat">Traitements experts<span>Anti‑bactérien / Anti‑acariens</span></div>
+        <div class="stat">Devis rapide<span>Par photo & dimensions</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="offre-lancement">
+      <h2>Offre de lancement</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Avantage immédiat</h3>
+          <ul class="list">
+            <li>-50% sur le 2e textile lors de la même intervention</li>
+            <li>-10% sur la première prestation</li>
+            <li>Offre non cumulable</li>
+            <li>Valable pour les premiers clients</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Comment en profiter ?</h3>
+          <p>Indique “Offre de lancement” dans ta demande, avec photos et dimensions.</p>
+          <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Offre%20de%20lancement%20NJR%20Solutions&body=Bonjour%2C%20je%20souhaite%20b%C3%A9n%C3%A9ficier%20de%20l%E2%80%99offre%20de%20lancement.%20Voici%20les%20d%C3%A9tails%20:%20">Profiter de l’offre</a>
+            <a class="btn" href="https://wa.me/33675835043?text=Bonjour%2C%20je%20souhaite%20b%C3%A9n%C3%A9ficier%20de%20l%E2%80%99offre%20de%20lancement%20NJR%20Solutions.">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <h2>Services</h2>
+      <div class="cards">
+        <div class="card"><h3>Matelas & literie</h3><p>Nettoyage en profondeur, désinfection, élimination des acariens.</p></div>
+        <div class="card"><h3>Canapés & textiles</h3><p>Détachage, nettoyage vapeur et traitements adaptés.</p></div>
+        <div class="card"><h3>Intérieur véhicule</h3><p>Sièges, plastiques, aspiration complète.</p></div>
+        <div class="card"><h3>Professionnels</h3><p>Hôtels, bureaux, commerces : prestations sur mesure.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="formules">
+      <h2>Formules</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Maison</h3>
+          <ul class="list">
+            <li>Matelas (traitement anti‑acariens)</li>
+            <li>Canapés & fauteuils</li>
+            <li>Élimination des odeurs, taches & allergènes</li>
+            <li>Hygiène, fraîcheur & confort durable</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Voiture</h3>
+          <ul class="list">
+            <li>Nettoyage des sièges tissus / aspiration habitacle</li>
+            <li>Tapis & moquettes</li>
+            <li>Odeurs animaux, tabac, humidité</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Formules</h3>
+          <ul class="list">
+            <li>Essentiel : nettoyage ciblé</li>
+            <li>Premium : propreté renforcée & fraîcheur</li>
+            <li>Ultra : hygiène maximale & finition complète</li>
+            <li>Options & packs sur demande</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Professionnels & multi‑textiles</h3>
+          <ul class="list">
+            <li>Bureaux, locations, commerces</li>
+            <li>Véhicules professionnels & flottes auto</li>
+            <li>Intervention sur devis</li>
+            <li>Tarification préférentielle lorsque plusieurs textiles sont traités lors d’une même intervention</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="processus">
+      <h2>Processus</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>1. Diagnostic</h3>
+          <p>Évaluation rapide du textile et des taches pour choisir la méthode adaptée.</p>
+        </div>
+        <div class="card">
+          <h3>2. Nettoyage</h3>
+          <p>Traitement en profondeur, extraction et assainissement des fibres.</p>
+        </div>
+        <div class="card">
+          <h3>3. Protection</h3>
+          <p>Option antibactérien/anti‑acariens pour une hygiène durable.</p>
+        </div>
+        <div class="card">
+          <h3>4. Contrôle</h3>
+          <p>Vérification finale et conseils d’entretien pour garder le résultat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engagements">
+      <h2>Engagements</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Qualité premium</h3>
+          <p>Produits et méthodes professionnelles pour préserver les matières.</p>
+        </div>
+        <div class="card">
+          <h3>Transparence</h3>
+          <p>Devis clair et conseils simples avant intervention.</p>
+        </div>
+        <div class="card">
+          <h3>Disponibilité</h3>
+          <p>Interventions rapides sur Villeneuve‑sur‑Lot et alentours.</p>
+        </div>
+        <div class="card">
+          <h3>Soin du détail</h3>
+          <p>Finitions soignées pour un rendu propre et durable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tarifs">
+      <h2>Tarifs indicatifs</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>À la pièce</h3>
+          <p>Matelas, canapé, siège auto : devis rapide selon taille et état.</p>
+        </div>
+        <div class="card">
+          <h3>Pack logement</h3>
+          <p>Plusieurs textiles dans la même intervention, tarif dégressif.</p>
+        </div>
+        <div class="card">
+          <h3>Professionnels</h3>
+          <p>Hôtels, bureaux, commerces : planification et devis sur mesure.</p>
+        </div>
+        <div class="card">
+          <h3>Options</h3>
+          <p>Traitement antibactérien / anti‑acariens selon besoin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <h2>Produits & Procédés</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Produits professionnels</h3>
+          <p>Formules adaptées aux textiles pour préserver les fibres et les couleurs.</p>
+          <div class="badge-row">
+            <span class="badge">Textiles délicats</span>
+            <span class="badge">Nettoyage en profondeur</span>
+            <span class="badge">Traitement anti‑acariens</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Processus maîtrisé</h3>
+          <p>Étapes de préparation, détachage, extraction et finition contrôlée.</p>
+          <div class="badge-row">
+            <span class="badge">Diagnostic</span>
+            <span class="badge">Extraction</span>
+            <span class="badge">Contrôle qualité</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Engagement hygiène</h3>
+          <p>Objectif : un textile propre, sain et durable.</p>
+          <div class="badge-row">
+            <span class="badge">Anti‑bactérien</span>
+            <span class="badge">Anti‑odeurs</span>
+            <span class="badge">Confort</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Questions fréquentes</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Combien de temps dure l’intervention ?</h3>
+          <p>Variable selon la surface et le niveau d’encrassement.</p>
+        </div>
+        <div class="card">
+          <h3>Le textile est‑il mouillé après ?</h3>
+          <p>Humidité maîtrisée, séchage naturel recommandé.</p>
+        </div>
+        <div class="card">
+          <h3>Faut‑il préparer avant ?</h3>
+          <p>Un accès dégagé facilite l’intervention.</p>
+        </div>
+        <div class="card">
+          <h3>Comment obtenir un devis ?</h3>
+          <p>Envoie une photo + dimensions par email ou téléphone.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comparatif">
+      <h2>Avant / Après (résumé)</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Avant intervention</h3>
+          <ul class="list">
+            <li>Odeurs incrustées</li>
+            <li>Taches visibles</li>
+            <li>Allergènes et poussières</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Après intervention</h3>
+          <ul class="list">
+            <li>Textile assaini</li>
+            <li>Aspect ravivé</li>
+            <li>Confort amélioré</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="qualite">
+      <h2>Engagement qualité</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="icon-pill">Q</div>
+          <h3>Qualité contrôlée</h3>
+          <p>Chaque intervention suit un protocole précis et vérifié.</p>
+        </div>
+        <div class="card">
+          <div class="icon-pill">S</div>
+          <h3>Sur‑mesure</h3>
+          <p>Produits et méthodes adaptés au tissu et au niveau d’encrassement.</p>
+        </div>
+        <div class="card">
+          <div class="icon-pill">R</div>
+          <h3>Résultat durable</h3>
+          <p>Conseils d’entretien pour prolonger la propreté.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="avis">
+      <h2>Avis clients</h2>
+      <div class="ticker">
+        <div class="ticker-track">
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Canapé comme neuf</h3>
+            <p>“Rapide et très propre. Résultat impressionnant, odeurs éliminées.”</p>
+          </div>
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Matelas désinfecté</h3>
+            <p>“Service pro, ponctuel, traitement anti‑acariens efficace.”</p>
+          </div>
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Sièges auto</h3>
+            <p>“Intérieur voiture impeccable, travail soigné.”</p>
+          </div>
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Rapport qualité/prix</h3>
+            <p>“Devis clair, intervention rapide, super résultat.”</p>
+          </div>
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Professionnalisme</h3>
+            <p>“Méthode précise et très bon suivi.”</p>
+          </div>
+          <div class="card">
+            <span class="pill">★★★★★</span>
+            <h3>Confort retrouvé</h3>
+            <p>“Textiles ravivés et ambiance plus saine.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultats">
+      <h2>Résultats</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Hygiène renforcée</h3>
+          <p>Traitement antibactérien et anti‑acariens pour un textile sain et durable.</p>
+        </div>
+        <div class="card">
+          <h3>Détachage ciblé</h3>
+          <p>Protocoles adaptés aux matières pour réduire les taches sans abîmer.</p>
+        </div>
+        <div class="card">
+          <h3>Confort retrouvé</h3>
+          <p>Odeurs neutralisées, fibres ravivées, intérieur plus agréable.</p>
+        </div>
+        <div class="card">
+          <h3>Intervention rapide</h3>
+          <p>Devis clair et déplacement à Villeneuve‑sur‑Lot et alentours.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="disponibilites">
+      <div class="glass accent" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+        <div>
+          <h2 style="margin:0 0 6px;">Disponibilités du mois</h2>
+          <p style="margin:0; color:var(--muted);">Consulte le calendrier et réserve ton créneau en quelques clics.</p>
+        </div>
+        <a class="btn btn-primary" href="#reservation">Voir le calendrier</a>
+      </div>
+    </section>
+
+    <section class="section" id="deplacement">
+      <h2>Déplacement</h2>
+      <div class="card">
+        <p>Déplacement gratuit à Villeneuve‑sur‑Lot / Bias / Pujols.</p>
+        <p>Frais de déplacement au‑delà (selon distance).</p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="contact">
+        <div class="card">
+          <h3>Coordonnées</h3>
+          <p>Téléphone : 06 75 83 50 43</p>
+          <p>Email : ragotnaimpro@gmail.com</p>
+          <p>Zone : Villeneuve‑sur‑Lot & alentours</p>
+          <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn" href="tel:0675835043">Appeler</a>
+            <a class="btn" href="https://wa.me/33675835043">WhatsApp</a>
+            <a class="map-pill" href="https://www.google.com/maps/search/?api=1&query=Villeneuve-sur-Lot">Itinéraire</a>
+            <a class="map-pill" href="https://www.google.com/maps/search/?api=1&query=NJR%20Solutions%20Villeneuve-sur-Lot">Laisser un avis</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Demande de devis</h3>
+          <p>Envoie un message avec type de textile + photos si possible.</p>
+          <form id="devis-form" class="form-grid">
+            <input class="input" type="text" name="name" placeholder="Nom / Entreprise" required />
+            <input class="input" type="tel" name="phone" placeholder="Téléphone" required />
+            <input class="input" type="text" name="city" placeholder="Ville" required />
+            <textarea class="input" name="details" rows="3" placeholder="Texte, dimensions, état, options souhaitées" required></textarea>
+            <button class="btn btn-primary" type="submit">Envoyer via Gmail</button>
+          </form>
+          <div id="devis-feedback" class="notice" style="display:none;"></div>
+          <div class="hint">Le message s’ouvre dans Gmail Web avec les infos pré‑remplies.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="devis-express">
+      <div class="glass" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;">
+        <div>
+          <h2 style="margin:0 0 8px;">Devis express en 3 étapes</h2>
+          <p style="margin:0; color:var(--muted);">1) Photo du textile · 2) Dimensions · 3) Ville d’intervention.</p>
+        </div>
+        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Devis%20NJR%20Solutions">Obtenir un devis</a>
+      </div>
+    </section>
+
+    <section class="section" id="reservation">
+      <h2>Disponibilités</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Choisir un créneau</h3>
+          <p>Les jours en surbrillance sont disponibles. Choisis une plage horaire puis clique sur un jour.</p>
+          <div class="calendar-header">
+            <div class="calendar-title" id="calendar-title">Mois</div>
+            <div class="pill">Sélectionne un jour</div>
+          </div>
+          <div class="week-row" id="week-row"></div>
+          <div class="slot-row" id="slot-row">
+            <button class="slot active" type="button" data-slot="Matin">Matin</button>
+            <button class="slot" type="button" data-slot="Après-midi">Après‑midi</button>
+            <button class="slot" type="button" data-slot="Soir">Soir</button>
+          </div>
+          <div class="calendar" id="calendar"></div>
+          <div id="calendar-feedback" class="notice" style="display:none;"></div>
+          <div class="hint">Ce calendrier est indicatif. Confirme par email ou WhatsApp.</div>
+        </div>
+        <div class="card">
+          <h3>Demande rapide</h3>
+          <p>Envoie ta date souhaitée et on confirme la disponibilité.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Disponibilit%C3%A9%20NJR%20Solutions">Demander une date</a>
+            <a class="btn" href="https://wa.me/33675835043?text=Bonjour%2C%20je%20souhaite%20confirmer%20un%20cr%C3%A9neau%20pour%20un%20nettoyage%20textile.">Rappel WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="footer">
+      <div class="footer-grid">
+        <div class="footer-card">
+          <h4>NJR Solutions</h4>
+          <p>Nettoyage textile premium à Villeneuve‑sur‑Lot et alentours.</p>
+        </div>
+        <div class="footer-card">
+          <h4>Services</h4>
+          <p>Matelas, canapés, sièges auto, professionnels.</p>
+        </div>
+        <div class="footer-card">
+          <h4>Contact</h4>
+          <p>Tél : 06 75 83 50 43</p>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com&su=Devis%20NJR%20Solutions">ragotnaimpro@gmail.com</a>
+          <div style="margin-top:8px;">
+            <a class="btn" href="https://wa.me/33675835043" style="padding:6px 10px; font-size:12px;">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="mentions">
+      <h2>Mentions légales</h2>
+      <div class="card">
+        <p><strong>Éditeur du site :</strong> NJR Solutions</p>
+        <p><strong>Siège :</strong> Villeneuve‑sur‑Lot, 47300</p>
+        <p><strong>SIRET :</strong> 99422100000015</p>
+        <p><strong>Contact :</strong> ragotnaimpro@gmail.com · 06 75 83 50 43</p>
+        <p><strong>Hébergement :</strong> À préciser (en attente de mise en ligne).</p>
+      </div>
+    </section>
+    <div class="footer">NJR Solutions · Nettoyage textile premium · SIRET : 99422100000015</div>
+    <a class="floating-cta" href="tel:0675835043">Appeler</a>
+    <script>
+      (function () {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) return;
+        const hero = document.getElementById("hero");
+        if (!hero) return;
+        const logo = hero.querySelector(".hero-logo");
+        const glass = hero.querySelector(".glass");
+        hero.addEventListener("mousemove", (e) => {
+          const rect = hero.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          if (logo) logo.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+          if (glass) glass.style.transform = `translate(${x * -6}px, ${y * -6}px)`;
+        });
+        hero.addEventListener("mouseleave", () => {
+          if (logo) logo.style.transform = "";
+          if (glass) glass.style.transform = "";
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        const header = document.querySelector("header");
+        if (!header) return;
+        const onScroll = () => {
+          if (window.scrollY > 30) header.classList.add("scrolled");
+          else header.classList.remove("scrolled");
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+    <script>
+      (function () {
+        const form = document.getElementById("devis-form");
+        const feedback = document.getElementById("devis-feedback");
+        if (!form) return;
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const data = new FormData(form);
+          const body =
+            `Nom/Entreprise: ${data.get("name")}\n` +
+            `Téléphone: ${data.get("phone")}\n` +
+            `Ville: ${data.get("city")}\n` +
+            `Détails: ${data.get("details")}`;
+          const url =
+            "https://mail.google.com/mail/?view=cm&fs=1" +
+            "&to=ragotnaimpro@gmail.com" +
+            "&su=Devis%20NJR%20Solutions" +
+            "&body=" + encodeURIComponent(body);
+          window.open(url, "_blank");
+          if (feedback) {
+            feedback.style.display = "block";
+            feedback.innerHTML = `Gmail s’est ouvert dans un nouvel onglet. Si besoin, <a href="${url}" target="_blank" rel="noopener">clique ici</a>.`;
+          }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        const cal = document.getElementById("calendar");
+        if (!cal) return;
+        const title = document.getElementById("calendar-title");
+        const slotRow = document.getElementById("slot-row");
+        const weekRow = document.getElementById("week-row");
+        const calFeedback = document.getElementById("calendar-feedback");
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const monthName = today.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+        if (title) title.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+        const days = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+        days.forEach((d) => {
+          const el = document.createElement("div");
+          el.className = "cal-day";
+          el.textContent = d;
+          cal.appendChild(el);
+        });
+
+        if (weekRow) {
+          const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          for (let i = 0; i < 7; i++) {
+            const d = new Date(start);
+            d.setDate(start.getDate() + i);
+            const dd = String(d.getDate()).padStart(2, "0");
+            const label = d.toLocaleDateString("fr-FR", { weekday: "short" });
+            const pill = document.createElement("div");
+            pill.className = "week-pill" + (i === 0 ? " active" : "");
+            pill.textContent = `${label} ${dd}`;
+            pill.addEventListener("click", () => {
+              weekRow.querySelectorAll(".week-pill").forEach((el) => el.classList.remove("active"));
+              pill.classList.add("active");
+              const mm = String(d.getMonth() + 1).padStart(2, "0");
+              const body =
+                `Bonjour,%0AJe souhaite un rendez-vous le ${dd}/${mm}/${d.getFullYear()} (${selectedSlot}).%0AMerci.`;
+              const url =
+                "https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com" +
+                "&su=Disponibilit%C3%A9%20NJR%20Solutions&body=" + body;
+              window.open(url, "_blank");
+              if (calFeedback) {
+                calFeedback.style.display = "block";
+                calFeedback.innerHTML = `Gmail s’est ouvert dans un nouvel onglet. Si besoin, <a href="${url}" target="_blank" rel="noopener">clique ici</a>.`;
+              }
+            });
+            weekRow.appendChild(pill);
+          }
+        }
+
+        let selectedSlot = "Matin";
+        if (slotRow) {
+          slotRow.addEventListener("click", (e) => {
+            const target = e.target.closest(".slot");
+            if (!target) return;
+            slotRow.querySelectorAll(".slot").forEach((el) => el.classList.remove("active"));
+            target.classList.add("active");
+            selectedSlot = target.getAttribute("data-slot") || "Matin";
+          });
+        }
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0).getDate();
+        let offset = firstDay.getDay() - 1;
+        if (offset < 0) offset = 6;
+
+        for (let i = 0; i < offset; i++) {
+          const el = document.createElement("div");
+          el.className = "cal-day muted";
+          el.textContent = "";
+          cal.appendChild(el);
+        }
+
+        for (let day = 1; day <= lastDay; day++) {
+          const el = document.createElement("div");
+          const date = new Date(year, month, day);
+          const weekday = date.getDay(); // 0=dim, 6=sam
+          const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          const isAvailable = weekday !== 0 && !isPast; // indisponible le dimanche + passé
+          el.className = "cal-day" + (isAvailable ? " available" : isPast ? " disabled" : "");
+          el.textContent = day;
+          if (isAvailable) {
+            el.style.cursor = "pointer";
+            el.addEventListener("click", () => {
+              const mm = String(month + 1).padStart(2, "0");
+              const dd = String(day).padStart(2, "0");
+              const body =
+                `Bonjour,%0AJe souhaite un rendez-vous le ${dd}/${mm}/${year} (${selectedSlot}).%0AMerci.`;
+              const url =
+                "https://mail.google.com/mail/?view=cm&fs=1&to=ragotnaimpro@gmail.com" +
+                "&su=Disponibilit%C3%A9%20NJR%20Solutions&body=" + body;
+              window.open(url, "_blank");
+              if (calFeedback) {
+                calFeedback.style.display = "block";
+                calFeedback.innerHTML = `Gmail s’est ouvert dans un nouvel onglet. Si besoin, <a href="${url}" target="_blank" rel="noopener">clique ici</a>.`;
+              }
+            });
+          }
+          cal.appendChild(el);
+        }
+      })();
+    </script>
+  </body>
+</html>
